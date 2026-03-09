@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azwar Ali — Fashion Photographer & Creative</title>
+  <meta name="description" content="Azwar Ali is a Pakistani filmmaker and director. Fashion photography, brand films, and editorial work across Pakistan, Dubai, and internationally.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <!-- ── Navigation ────────────────────────────────── -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-name">AZWAR ALI</span>
+      <span class="nav-sub">Fashion Photographer & Creative</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html" class="active">WORK</a>
+      <a href="about.html">ABOUT</a>
+      <a href="clients.html">CLIENTS</a>
+
+      <div class="view-toggle" id="viewToggle">
+        <button class="vt-btn active" data-view="world">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.1">
+            <circle cx="6" cy="6" r="5"/>
+            <ellipse cx="6" cy="6" rx="2.5" ry="5"/>
+            <line x1="1" y1="6" x2="11" y2="6"/>
+          </svg>
+          WORLD
+        </button>
+        <button class="vt-btn" data-view="grid">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor">
+            <rect x="1" y="1" width="4" height="4" rx="0.4"/>
+            <rect x="7" y="1" width="4" height="4" rx="0.4"/>
+            <rect x="1" y="7" width="4" height="4" rx="0.4"/>
+            <rect x="7" y="7" width="4" height="4" rx="0.4"/>
+          </svg>
+          GRID
+        </button>
+      </div>
+
+      <a href="https://wa.me/923034639999?text=Hi%20Azwar%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" class="nav-inquire">INQUIRE →</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">WORK</a>
+    <a href="about.html">ABOUT</a>
+    <a href="clients.html">CLIENTS</a>
+    <a href="https://wa.me/923034639999?text=Hi%20Azwar%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." target="_blank">INQUIRE</a>
+    <div class="mobile-view-toggle">
+      <button class="vt-btn active" data-view="world">WORLD VIEW</button>
+      <button class="vt-btn" data-view="grid">GRID VIEW</button>
+    </div>
+  </div>
+
+  <!-- ── WORLD VIEW ─────────────────────────────────── -->
+  <div id="worldView" class="world-scene" aria-label="World View — CSS 3D photo sphere">
+
+    <!-- Decorative orbit rings (pure CSS, zero JS) -->
+    <div class="orbit-ring ring-1" aria-hidden="true"></div>
+    <div class="orbit-ring ring-2" aria-hidden="true"></div>
+
+    <!-- The rotating world — sphere-world is the single element we transform per frame -->
+    <div class="sphere-world" id="sphereWorld"></div>
+
+
+  </div>
+
+  <!-- ── GRID VIEW ──────────────────────────────────── -->
+  <div id="gridView" class="grid-wrap hidden">
+
+    <section class="hero">
+      <div>
+        <p class="hero-kicker">Filmmaker · Director · Visual Storyteller</p>
+        <h1 class="hero-title">Selected<br>Work</h1>
+      </div>
+      <span class="hero-count">36 images</span>
+    </section>
+
+    <main class="portfolio-grid">
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF3710.png" alt="Azwar Ali" loading="eager"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF3671.png" alt="Azwar Ali" loading="eager"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF1886.png" alt="Azwar Ali" loading="eager"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF0536-Enhanced-NR.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF7108-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF8269%203.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF6199-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF9204.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF5628-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF7293-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF8342.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF5787-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF1438-Enhanced-NR-1.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF8393.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF8257%203.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF5917-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/RNI-Films-IMG-1CFBD945-206D-489A-BE13-8BEFEF556B88.JPG" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF6395.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/IMG_9282.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF6400.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF3800.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF3802.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF3779.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/RNI-Films-IMG-CD160AFD-9964-4C12-BBCA-1C058EC22E91.JPG" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF8952.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF1343-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF1778.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF1867.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DOGUE23.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF1865-Enhanced-NR.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/RNI-Films-IMG-71D295A4-0F19-42ED-BFB4-F84F51330F5D.JPG" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/DSCF3697.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/IMG_9025j.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/60x25.png" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/8.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+      <div class="portfolio-item"><img src="Fashion%20Photos%20/Portfolio/images/14.jpg" alt="Azwar Ali" loading="lazy"><div class="portfolio-item-overlay"><span class="overlay-icon">+</span></div></div>
+    </main>
+
+    <footer class="footer">
+      <span>© 2025 Azwar Ali</span>
+      <div class="footer-social"><a href="https://instagram.com/theazwarism" target="_blank">@theazwarism</a></div>
+      <span>Pakistan · Dubai · International</span>
+    </footer>
+  </div>
+
+  <!-- ── Shared Lightbox ────────────────────────────── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lb-btn" id="lbClose" aria-label="Close">×</button>
+    <button class="lb-btn" id="lbPrev"  aria-label="Previous">←</button>
+    <button class="lb-btn" id="lbNext"  aria-label="Next">→</button>
+    <div class="lightbox-inner">
+      <img src="" alt="Azwar Ali" id="lbImg">
+    </div>
+    <div class="lb-counter" id="lbCounter">1 / 36</div>
+  </div>
+
+  <!-- ── Scripts (no Three.js) ────────────────────── -->
+  <script src="js/sphere.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* ---- Lightbox ------------------------------------------------- */
+    (function () {
+      const lb     = document.getElementById('lightbox');
+      const img    = document.getElementById('lbImg');
+      const ctr    = document.getElementById('lbCounter');
+      const imgs   = window.PORTFOLIO_IMAGES;
+      let cur      = 0;
+
+      function show(i) {
+        cur = ((i % imgs.length) + imgs.length) % imgs.length;
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = imgs[cur];
+          img.style.opacity = '1';
+          img.style.transition = 'opacity 0.2s';
+          ctr.textContent = (cur + 1) + ' / ' + imgs.length;
+        }, 160);
+      }
+
+      window.openLightbox = function (i) {
+        show(i);
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      };
+
+      function close() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { img.src = ''; }, 350);
+      }
+
+      document.getElementById('lbClose').onclick = close;
+      document.getElementById('lbPrev').onclick  = () => show(cur - 1);
+      document.getElementById('lbNext').onclick  = () => show(cur + 1);
+      lb.addEventListener('click', e => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     close();
+        if (e.key === 'ArrowLeft')  show(cur - 1);
+        if (e.key === 'ArrowRight') show(cur + 1);
+      });
+
+      /* Grid-view clicks */
+      document.querySelectorAll('.portfolio-item').forEach((el, i) => {
+        el.addEventListener('click', () => window.openLightbox(i));
+      });
+    }());
+
+    /* ---- World View init ------------------------------------------ */
+    (function () {
+      let sphere = null;
+
+      function initSphere() {
+        if (!sphere) {
+          sphere = new PhotoSphere('worldView', 'sphereWorld', window.openLightbox);
+        }
+      }
+
+      initSphere();
+
+      const worldWrap = document.getElementById('worldView');
+      const gridWrap  = document.getElementById('gridView');
+      const allBtns   = document.querySelectorAll('.vt-btn');
+
+      allBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const view = btn.dataset.view;
+          allBtns.forEach(b => b.classList.toggle('active', b.dataset.view === view));
+
+          if (view === 'world') {
+            gridWrap.classList.add('hidden');
+            worldWrap.classList.remove('hidden');
+            if (sphere) sphere.resume(); else initSphere();
+          } else {
+            worldWrap.classList.add('hidden');
+            gridWrap.classList.remove('hidden');
+            if (sphere) sphere.pause();
+          }
+
+          /* Close mobile menu */
+          document.getElementById('mobileMenu').classList.remove('open');
+          document.getElementById('navToggle').classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
