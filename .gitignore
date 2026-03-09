@@ -1,1 +1,6 @@
 .vercel
+.DS_Store
+
+# Full-res originals are too large for Git — thumbnails in /thumbs/ are tracked instead
+Fashion Photos /Portfolio/images/
+Fashion Photos /Portfolio/photographer bio/
