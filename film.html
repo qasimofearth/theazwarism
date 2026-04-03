@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film — Azwar Ali</title>
+  <meta name="description" content="Azwar Ali — filmmaker, director, and visual storyteller. Fashion films, brand films, and cinematic campaigns across Pakistan, Dubai, and internationally.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Film page overrides ── */
+    body { overflow-x: hidden; }
+
+    /* ── Full-screen reel hero ── */
+    .film-hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .film-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.8s ease;
+    }
+    .film-bg-video.loaded { opacity: 1; }
+
+    /* Cinematic letterbox bars */
+    .film-hero::before,
+    .film-hero::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 9vh;
+      background: #000;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .film-hero::before { top: 0; }
+    .film-hero::after  { bottom: 0; }
+
+    /* Gradient overlay */
+    .film-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(8,8,8,0.55) 0%,
+          rgba(8,8,8,0.10) 35%,
+          rgba(8,8,8,0.10) 60%,
+          rgba(8,8,8,0.75) 100%
+        );
+      z-index: 2;
+    }
+
+    /* Text centred over video */
+    .film-hero-content {
+      position: relative;
+      z-index: 4;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 1.4s 0.6s ease, transform 1.4s 0.6s ease;
+    }
+    .film-hero-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .film-kicker {
+      font-family: var(--f-body);
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .film-main-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(64px, 12vw, 152px);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+      color: var(--text-primary);
+    }
+    .film-sub {
+      font-family: var(--f-body);
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: rgba(240,240,238,0.55);
+      text-transform: uppercase;
+    }
+
+    /* Sound toggle — bottom right */
+    .sound-btn {
+      position: fixed;
+      bottom: 36px;
+      right: 44px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--f-body);
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--text-secondary);
+      background: none;
+      border: 1px solid var(--border-mid);
+      padding: 10px 18px;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      text-transform: uppercase;
+      cursor: none;
+    }
+    .sound-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: rgba(201,169,126,0.06);
+    }
+    .sound-icon { font-size: 12px; line-height: 1; }
+
+    /* Scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 11vh;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.5;
+      animation: cuePulse 2.8s ease-in-out infinite;
+    }
+    .scroll-cue span {
+      font-family: var(--f-body);
+      font-size: 7px;
+      letter-spacing: 0.28em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    @keyframes cuePulse {
+      0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+      50%       { opacity: 0.7; transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Statement section ── */
+    .film-statement {
+      padding: 120px 44px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .film-statement-label {
+      font-family: var(--f-body);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      margin-bottom: 52px;
+    }
+    .film-statement-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(28px, 4vw, 54px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+    .film-statement-text em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    /* ── Three column copy ── */
+    .film-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .film-col {
+      background: var(--bg);
+      padding: 64px 44px;
+      transition: background 0.35s;
+    }
+    .film-col:hover { background: var(--surface-2); }
+    .film-col-num {
+      font-family: var(--f-body);
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    .film-col-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 30px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      color: var(--text-primary);
+    }
+    .film-col-body {
+      font-family: var(--f-body);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-secondary);
+    }
+
+    /* ── Pull quote ── */
+    .film-pull-quote {
+      padding: 100px 44px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .film-pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 280px;
+      font-style: italic;
+      color: rgba(201, 169, 126, 0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .film-quote-text {
+      position: relative;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(22px, 3.2vw, 46px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--text-primary);
+      max-width: 820px;
+      margin: 0 auto 32px;
+      letter-spacing: -0.01em;
+    }
+    .film-quote-attr {
+      font-family: var(--f-body);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    /* ── Film disciplines grid ── */
+    .film-disciplines {
+      padding: 88px 44px;
+      border-bottom: 1px solid var(--border);
+    }
+    .film-disc-label {
+      font-family: var(--f-body);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      margin-bottom: 56px;
+    }
+    .disc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+    .disc-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding-left 0.35s var(--ease-out);
+    }
+    .disc-item:hover { padding-left: 12px; }
+    .disc-item:nth-child(odd) { padding-right: 44px; border-right: 1px solid var(--border); }
+    .disc-item:nth-child(even) { padding-left: 44px; }
+    .disc-item:nth-child(even):hover { padding-left: 56px; }
+    .disc-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-primary);
+    }
+    .disc-arrow {
+      font-size: 14px;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .disc-item:hover .disc-arrow { opacity: 1; }
+
+    /* ── CTA ── */
+    .film-cta {
+      padding: 120px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .film-cta-kicker {
+      font-family: var(--f-body);
+      font-size: 8px;
+      letter-spacing: 0.28em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .film-cta-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 52px;
+      max-width: 700px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .film-columns { grid-template-columns: 1fr; }
+      .disc-list { grid-template-columns: 1fr; }
+      .disc-item:nth-child(odd) { padding-right: 0; border-right: none; }
+      .disc-item:nth-child(even) { padding-left: 0; }
+      .disc-item:nth-child(even):hover { padding-left: 12px; }
+    }
+    @media (max-width: 768px) {
+      .film-statement, .film-disciplines, .film-cta, .film-pull-quote { padding: 72px 24px; }
+      .film-col { padding: 48px 24px; }
+      .sound-btn { right: 20px; bottom: 20px; }
+      .film-main-title { font-size: clamp(52px, 18vw, 100px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-name">AZWAR ALI</span>
+      <span class="nav-sub">Fashion Photographer & Creative</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">WORK</a>
+      <a href="film.html" class="active">FILM</a>
+      <a href="about.html">ABOUT</a>
+      <a href="clients.html">CLIENTS</a>
+      <a href="https://wa.me/923034639999?text=Hi%20Azwar%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" class="nav-inquire">INQUIRE →</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">WORK</a>
+    <a href="film.html">FILM</a>
+    <a href="about.html">ABOUT</a>
+    <a href="clients.html">CLIENTS</a>
+    <a href="https://wa.me/923034639999?text=Hi%20Azwar%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." target="_blank">INQUIRE</a>
+  </div>
+
+  <!-- ── FILM HERO ── -->
+  <section class="film-hero" id="filmHero">
+    <video
+      class="film-bg-video"
+      id="filmVideo"
+      src="videos/showreel.mov"
+      playsinline
+      loop
+      muted
+      preload="auto"
+    ></video>
+
+    <div class="film-overlay"></div>
+
+    <div class="film-hero-content" id="heroContent">
+      <p class="film-kicker">Showreel — 2025</p>
+      <h1 class="film-main-title">Film</h1>
+      <p class="film-sub">Direction · Fashion Film · Brand Cinema</p>
+    </div>
+
+    <div class="scroll-cue">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- Sound toggle button -->
+  <button class="sound-btn" id="soundBtn" aria-label="Toggle sound">
+    <span class="sound-icon" id="soundIcon">♪</span>
+    <span id="soundLabel">SOUND OFF</span>
+  </button>
+
+  <!-- ── STATEMENT ── -->
+  <section class="film-statement">
+    <p class="film-statement-label">The Work</p>
+    <p class="film-statement-text">
+      Azwar Ali doesn't just shoot fashion — he <em>directs</em> it.
+      Every frame a considered decision. Every cut a heartbeat.
+      Cinema is not a medium to him; it is a mother tongue.
+    </p>
+  </section>
+
+  <!-- ── THREE COLUMNS ── -->
+  <div class="film-columns">
+    <div class="film-col">
+      <p class="film-col-num">01 — Vision</p>
+      <h2 class="film-col-title">Light as Language</h2>
+      <p class="film-col-body">
+        In Azwar's films, light is never incidental. It is cast with the same
+        intention a poet chooses a word — to reveal what the eye alone cannot hold.
+        His frames breathe. His silences speak. His images outlast the moment they were made.
+      </p>
+    </div>
+    <div class="film-col">
+      <p class="film-col-num">02 — Craft</p>
+      <h2 class="film-col-title">Fashion Meets Cinema</h2>
+      <p class="film-col-body">
+        Trained across both disciplines, Azwar exists in the rare space where
+        editorial precision meets narrative depth. Brands don't receive a lookbook —
+        they receive a film. One that moves audiences long after the season has passed.
+      </p>
+    </div>
+    <div class="film-col">
+      <p class="film-col-num">03 — Reach</p>
+      <h2 class="film-col-title">Pakistan to the World</h2>
+      <p class="film-col-body">
+        From the studios of Karachi to the runways of Dubai and beyond,
+        Azwar's work carries a distinctly Pakistani sensibility into international
+        conversations. He tells stories that are rooted, refined, and entirely his own.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── PULL QUOTE ── -->
+  <section class="film-pull-quote">
+    <blockquote class="film-quote-text">
+      "The most dangerous thing a filmmaker can be is comfortable.
+       Azwar has never once been comfortable — and every frame proves it."
+    </blockquote>
+    <p class="film-quote-attr">On the work of Azwar Ali</p>
+  </section>
+
+  <!-- ── DISCIPLINES ── -->
+  <section class="film-disciplines">
+    <p class="film-disc-label">Disciplines</p>
+    <ul class="disc-list">
+      <li class="disc-item"><span class="disc-name">Fashion Film</span><span class="disc-arrow">→</span></li>
+      <li class="disc-item"><span class="disc-name">Brand Cinema</span><span class="disc-arrow">→</span></li>
+      <li class="disc-item"><span class="disc-name">Campaign Direction</span><span class="disc-arrow">→</span></li>
+      <li class="disc-item"><span class="disc-name">Editorial Film</span><span class="disc-arrow">→</span></li>
+      <li class="disc-item"><span class="disc-name">Creative Direction</span><span class="disc-arrow">→</span></li>
+      <li class="disc-item"><span class="disc-name">Narrative Short</span><span class="disc-arrow">→</span></li>
+      <li class="disc-item"><span class="disc-name">Visual Identity</span><span class="disc-arrow">→</span></li>
+      <li class="disc-item"><span class="disc-name">Commercial Production</span><span class="disc-arrow">→</span></li>
+    </ul>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="film-cta">
+    <p class="film-cta-kicker">Collaborate</p>
+    <h2 class="film-cta-heading">Your brand has a story. Let's film it properly.</h2>
+    <a
+      href="https://wa.me/923034639999?text=Hi%20Azwar%2C%20I%27d%20like%20to%20discuss%20a%20film%20project%20with%20you."
+      target="_blank"
+      class="btn-wa">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      LET'S MAKE SOMETHING
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>© 2025 Azwar Ali</span>
+    <div class="footer-social">
+      <a href="https://instagram.com/theazwarism" target="_blank">@theazwarism</a>
+    </div>
+    <span>Pakistan · Dubai · International</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      const video   = document.getElementById('filmVideo');
+      const btn     = document.getElementById('soundBtn');
+      const icon    = document.getElementById('soundIcon');
+      const label   = document.getElementById('soundLabel');
+      const content = document.getElementById('heroContent');
+
+      // Fade in video once it can play
+      video.addEventListener('canplay', function onCanPlay() {
+        video.classList.add('loaded');
+        content.classList.add('visible');
+        video.removeEventListener('canplay', onCanPlay);
+      });
+
+      // Start playing (muted, browser allows this)
+      video.play().catch(() => {});
+
+      // Also reveal content after a short delay regardless
+      setTimeout(() => content.classList.add('visible'), 800);
+
+      // Sound toggle
+      btn.addEventListener('click', function () {
+        if (video.muted) {
+          video.muted = false;
+          icon.textContent = '♫';
+          label.textContent = 'SOUND ON';
+          btn.style.color = 'var(--accent)';
+          btn.style.borderColor = 'var(--accent)';
+        } else {
+          video.muted = true;
+          icon.textContent = '♪';
+          label.textContent = 'SOUND OFF';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+        }
+      });
+    }());
+  </script>
+</body>
+</html>
